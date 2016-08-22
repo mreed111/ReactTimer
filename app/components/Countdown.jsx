@@ -4,7 +4,7 @@ var {Link} = require('react-router');
 var Countdown = (props) => {
   return (
     <div>
-      <h1>...Countdown...</h1>
+      <h1>...Countdown.jsx...</h1>
     </div>
   )
 };

@@ -4,7 +4,7 @@ var {Link} = require('react-router');
 var Timer = (props) => {
   return (
     <div>
-      <h1>...Timer...</h1>
+      <h1>...Timer.jsx...</h1>
     </div>
   )
 };
