@@ -1,14 +1,18 @@
 var React = require('react');
-var {Link} = require('react-router');
+var Clock = require('Clock');
+var CountdownForm = require('CountdownForm');
 
 var Clock = require('./Clock');
 
-var Timer = (props) => {
-  return (
-    <div>
-      <Clock />
-    </div>
-  )
-};
+var Timer = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <Clock totalSeconds={222}/>
+
+      </div>
+    );
+  }
+});
 
 module.exports = Timer;
