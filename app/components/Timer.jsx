@@ -2,21 +2,21 @@ var React = require('react');
 var Clock = require('Clock');
 var CountdownForm = require('CountdownForm');
 
-var Clock = require('./Clock');
+var Clock = require('Clock');
 var Controls = require('Controls');
 
 var Timer = React.createClass({
   getInitialState: function () {
     return {
       count: 0,
-      countdownStatus: 'paused'
+      timerStatus: 'paused'
     };
   },
   componentDidUpdate: function (prevProps, prevState) {
-    if (this.state.countdownStatus !== prevState.countdownStatus) {
-      switch (this.state.countdownStatus) {
+    if (this.state.timerStatus !== prevState.timerStatus) {
+      switch (this.state.timerStatus) {
         case 'started':
-          this.startTimer();
+          this.handleStartTimer();
           break;
         case 'stopped':
           this.setState({count: 0});
@@ -27,15 +27,15 @@ var Timer = React.createClass({
       }
     }
   },
-  startTimer: function () {
+  handleStartTimer: function () {
     this.timer = setInterval(() => {
       var newCount = this.state.count + 1;
       this.setState({
         count: newCount < 3600 ? newCount : 0
       });
 
-      if (newCount === 0) {
-        this.setState({countdownStatus: 'paused'});
+      if (this.state.count === 0) {
+        this.setState({timerStatus: 'paused'});
       }
     }, 1000);
   },
@@ -43,29 +43,23 @@ var Timer = React.createClass({
     if (newStatus === 'stopped') {
       this.setState({
         count: 0,
-        countdownStatus: 'paused'
+        timerStatus: 'paused'
       });
     } else {
       this.setState({
-        countdownStatus: newStatus
+        timerStatus: newStatus
       });
     }
   },
   render: function () {
-    var {count, countdownStatus} = this.state;
-    var renderControlArea = () => {
-      if (countdownStatus === 'stopped') {
-        this.setState({countdownStatus: 'paused'});
-
-      }
-    };
+    var {count, timerStatus} = this.state;
 
     return (
       <div>
         <h1 className="page-title">Timer</h1>
           <Clock totalSeconds={count}/>
 
-          <Controls countdownStatus={countdownStatus}
+          <Controls countdownStatus={timerStatus}
             onStatusChange={this.handleStatusChange}/>
       </div>
     );
